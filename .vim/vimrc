@@ -113,9 +113,6 @@ Plug 'tpope/vim-fugitive'
 " A vim plugin to display the indention levels with thin vertical lines
 Plug 'Yggdroot/indentLine'
 
-" Fuzzy file, buffer, mru, tag, etc finder.
-Plug 'ctrlpvim/ctrlp.vim'
-
 " Initialize plugin system
 call plug#end()
 
@@ -177,17 +174,3 @@ let g:tagbar_show_linenumbers=1
 
 " Settings for IndentLine
 let g:indentLine_color_term=237
-
-" Settings for CtrlP
-map <leader>f :CtrlPMixed<CR>
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=7
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
