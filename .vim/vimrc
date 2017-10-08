@@ -1,0 +1,193 @@
+" Use Vim settings, rather than Vi settings.
+set nocompatible
+
+" Make backspace behave in a sane manner.
+set backspace=indent,eol,start
+
+" Switch syntax highlighting on
+syntax on
+
+" Enable file type detection and do language-dependent indenting.
+filetype plugin indent on
+
+" Enable line number
+set number
+
+" Enable relative line number
+set relativenumber
+
+" Backup and swapfile settings
+set backup
+set backupdir=$HOME/.vim/backup/
+set noswapfile
+
+" Windows settings and operation
+set splitright
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Code Folding settings
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" Encoding settings
+set encoding=utf-8
+set ambiwidth=double
+
+" Settings for code indentation style
+set tabstop=4
+set shiftwidth=4
+
+" Enable the clipboard sharing function between vim and system
+" vim needs builded with +clipboard feature
+set clipboard=unnamedplus
+
+" Enable Python highlight
+let python_highlight_all = 1
+
+" Settings for Python files for meet the PEP8 requirement
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+au BufNewFile,BufRead *.js,*.html,*.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+
+" Specify a directory for plugins
+" Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" No-BS Python code folding for Vim
+Plug 'tmhedberg/SimpylFold'
+
+" An alternative indentation script for Python
+Plug 'vim-scripts/indentpython.vim'
+
+" Syntax checking hacks for vim
+Plug 'vim-syntastic/syntastic'
+
+" Flake8 plugin for Vim
+Plug 'nvie/vim-flake8'
+
+" Highlights whitespace at the end of lines, only in modifiable buffers
+Plug 'bitc/vim-bad-whitespace'
+
+" Vim theme
+Plug 'jakwings/vim-colors'
+
+" A tree explorer plugin for vim
+Plug 'scrooloose/nerdtree'
+
+" A plugin of NERDTree showing git status
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" NERDTree and tabs together in Vim, painlessly
+Plug 'jistr/vim-nerdtree-tabs'
+
+" Vim plugin for intensely orgasmic commenting
+Plug 'scrooloose/nerdcommenter'
+
+" Vim plugin that displays tags in a window
+Plug 'majutsushi/tagbar'
+
+" TextMate's snippets features in Vim.
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+
+" fugitive.vim: a Git wrapper
+Plug 'tpope/vim-fugitive'
+
+" A vim plugin to display the indention levels with thin vertical lines
+Plug 'Yggdroot/indentLine'
+
+" Fuzzy file, buffer, mru, tag, etc finder.
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Initialize plugin system
+call plug#end()
+
+" Settings for SimpyFold. Enable docstring preview in fold text.
+let g:SimpylFold_docstring_preview=1
+
+" Settings for Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_loc_list_height=6
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+
+" Settings for Vim theme
+set t_Co=256
+colorscheme moody
+
+" Settings for NERDTree
+map <F2> :NERDTreeToggle<CR>
+" Auto start NERDTree
+autocmd VimEnter * NERDTree
+" Auto focus to the main window.
+autocmd VimEnter * wincmd w
+" Enable line number
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+" Enable showing the hidden file
+let NERDTreeShowHidden=1
+" Windows width
+let NERDTreeWinSize=35
+" Ignore the file with below extension
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" Enable the bookmark
+let NERDTreeShowBookmarks=1
+
+" Settings for NERDTree Git plugin
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+" Settings for NERDCommenter
+let g:NERDSpaceDelims=1
+
+" Settings for Tagbar
+nmap <F3> :TagbarToggle<CR>
+let g:tagbar_show_linenumbers=1
+
+" Settings for IndentLine
+let g:indentLine_color_term=237
+
+" Settings for CtrlP
+map <leader>f :CtrlPMixed<CR>
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=7
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
