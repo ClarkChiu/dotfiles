@@ -22,7 +22,6 @@ set backupdir=$HOME/.vim/backup/
 set noswapfile
 
 " Windows settings and operation
-set splitright
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -101,12 +100,6 @@ Plug 'scrooloose/nerdcommenter'
 " Vim plugin that displays tags in a window
 Plug 'majutsushi/tagbar'
 
-" TextMate's snippets features in Vim.
-Plug 'tomtom/tlib_vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
-
 " fugitive.vim: a Git wrapper
 Plug 'tpope/vim-fugitive'
 
@@ -115,6 +108,13 @@ Plug 'Yggdroot/indentLine'
 
 " Async completion framework made ease.
 Plug 'maralla/completor.vim'
+
+" UltiSnips - The ultimate snippet solution for Vim.
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" Improvements to the handling of Django related files in Vim
+Plug 'tweekmonster/django-plus.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -182,3 +182,8 @@ let g:indentLine_color_term=237
 inoremap <expr> <Tab> 	pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> 	pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+" Settings for UltiSnips
+let g:UltiSnipsExpandTrigger="<C-y>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
