@@ -124,9 +124,6 @@ Plug 'maralla/completor.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" Improvements to the handling of Django related files in Vim
-Plug 'tweekmonster/django-plus.vim'
-
 " Initialize plugin system
 call plug#end()
 
@@ -140,6 +137,7 @@ set statusline+=%*
 
 let g:syntastic_loc_list_height=4
 let g:syntastic_always_populate_loc_list=1
+
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
