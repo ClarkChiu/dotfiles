@@ -1,0 +1,8 @@
+# Ingnore Vim backup folder
+.vim/backup/
+
+# Ingnore Vim plug folder
+.vim/plugged/
+
+# Ingnore history file of Vim script
+.netrwhist
