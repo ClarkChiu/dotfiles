@@ -1,14 +1,19 @@
 # Install the latest Vim from source and setting up the vimrc
 
-# Clone the dotfiles from GitHub
-git clone https://github.com/ClarkChiu/dotfiles ~/dotfiles
+## Clone the dotfiles from GitHub
+# git clone https://github.com/ClarkChiu/dotfiles ~/dotfiles
 
-# Make the latest vim from source
-sh ./VimCompileScript.sh
+## Update the latest Vim plugin manager
+curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > ~/dotfiles/.vim/autoload/plug.vim
 
-# Setup the soft link for vim resource
+## Make the latest vim from source
+sh ~/dotfiles/script/VimCompileScript.sh
+
+## Setup the soft link for vim resource
 mkdir ~/dotfiles/.vim/backup
-ln -sf ~/dotfiles/.vimrc ~/.vimrc
+ln -sf ~/dotfiles/.vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/.vim ~/.vim
 
-# Clean and Install the vim plugin
+## Clean and Install the vim plugin
+mkdir ~/dotfiles/.vim/plugged
+vim +'PlugInstall --sync' +qall &> /dev/null

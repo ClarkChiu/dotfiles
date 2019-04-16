@@ -3,6 +3,7 @@
 
 # Ingnore Vim plug folder
 .vim/plugged/
+.vim/autoload/
 
 # Ingnore history file of Vim script
 .netrwhist
