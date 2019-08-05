@@ -11,9 +11,15 @@ sudo apt-get install -y \
    	libx11-dev \
    	libxpm-dev \
    	libxt-dev \
+	liblua5.3-dev \
+	lua5.3 \
    	git
 
 sudo rm -rf /usr/local/share/vim /usr/bin/vim
+
+# link the lib of lua
+sudo ln -s /usr/include/lua5.3 /usr/include/lua
+sudo ln -s /usr/lib/x86_64-linux-gnu/liblua5.3.so /usr/local/lib/liblua.so
 
 cd ~
 git clone https://github.com/vim/vim
@@ -44,7 +50,8 @@ PYTHON3_CONFIG_DIR='/usr/local/lib/python3.6/config-3.6m-x86_64-linux-gnu'
     --enable-gui=no \
     --enable-cscope \
 	--disable-netbeans \
-	--with-compiledby="ClarkChiu"
+	--enable-fail-if-missing \
+	--with-compiledby="Clark Chiu"
 
 make -j 4 && sudo make install
 
