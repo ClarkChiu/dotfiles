@@ -1,1 +1,0 @@
-/home/clark/dotfiles/.vim

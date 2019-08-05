@@ -12,6 +12,9 @@ sh ~/dotfiles/script/VimCompileScript.sh
 
 ## Setup the soft link for vim resource
 mkdir -p ~/dotfiles/.vim/backup
+
+unlink ~/.vim
+unlink ~/.vimrc
 ln -sf ~/dotfiles/.vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/.vim ~/.vim
 

@@ -1,5 +1,9 @@
+# Tested on Ubuntu v18.04
+# Remove exists Vim
 sudo apt-get remove -y --purge vim vim-runtime vim-gnome vim-tiny vim-gui-common
+sudo rm -rf /usr/local/share/vim /usr/bin/vim
 
+# Install required packages
 sudo apt-get update
 sudo apt-get install -y \
    	python-dev \
@@ -15,25 +19,23 @@ sudo apt-get install -y \
 	lua5.3 \
    	git
 
-sudo rm -rf /usr/local/share/vim /usr/bin/vim
+pip3 install --user pynvim
 
-# link the lib of lua
+# link the libs of lua
+sudo rm -f /usr/include/lua /usr/local/lib/liblua.so
 sudo ln -s /usr/include/lua5.3 /usr/include/lua
 sudo ln -s /usr/lib/x86_64-linux-gnu/liblua5.3.so /usr/local/lib/liblua.so
 
+# Make the Vim from source
 cd ~
 git clone https://github.com/vim/vim
 cd vim
 git pull && git fetch
 git clean -fdx
 
-#In case Vim was already installed
 cd src
 make distclean
 cd ..
-
-PYTHON2_CONFIG_DIR='/usr/lib/python2.7/config-x86_64-linux-gnu'
-PYTHON3_CONFIG_DIR='/usr/local/lib/python3.6/config-3.6m-x86_64-linux-gnu'
 
 ./configure \
 	--with-features=huge \
@@ -42,15 +44,12 @@ PYTHON3_CONFIG_DIR='/usr/local/lib/python3.6/config-3.6m-x86_64-linux-gnu'
 	--enable-rubyinterp=yes \
 	--enable-perlinterp=yes \
 	--enable-luainterp=yes \
-	--enable-pythoninterp=yes \
-	--with-python-config-dir=$PYTHON2_CONFIG_DIR \
 	--enable-python3interp=yes \
-	--with-python3-config-dir=$PYTHON3_CONFIG_DIR \
-	--prefix=/usr/local \
     --enable-gui=no \
     --enable-cscope \
 	--disable-netbeans \
 	--enable-fail-if-missing \
+	--prefix=/usr/local \
 	--with-compiledby="Clark Chiu"
 
 make -j 4 && sudo make install

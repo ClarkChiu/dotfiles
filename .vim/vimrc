@@ -117,14 +117,28 @@ Plug 'tpope/vim-fugitive'
 " A vim plugin to display the indention levels with thin vertical lines
 Plug 'Yggdroot/indentLine'
 
-" Async completion framework made ease.
-Plug 'maralla/completor.vim'
-
 " UltiSnips - The ultimate snippet solution for Vim.
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
-" Initialize plugin system
+" Dark powered asynchronous completion framework for neovim/Vim8
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+
+if has('win32') || has('win64')
+  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
+else
+  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+endif
+
 call plug#end()
 
 " Settings for SimpyFold. Enable docstring preview in fold text.
@@ -187,12 +201,47 @@ let g:tagbar_show_linenumbers=1
 " Settings for IndentLine
 let g:indentLine_color_term=237
 
-" Settings for completor
-inoremap <expr> <Tab> 	pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> 	pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
 " Settings for UltiSnips
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-b>"
+" let g:UltiSnipsExpandTrigger="<C-j>"
+" let g:UltiSnipsJumpForwardTrigger="<C-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<C-b>"
+
+" Status line configuration from
+" https://blog.longwin.com.tw/2009/10/vim-session-status-bar-2009/
+set laststatus=2
+set statusline=%4*%<\ %1*[%F]
+set statusline+=%4*\ %5*[%{&encoding}, " encoding
+set statusline+=%{&fileformat}%{\"\".((exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\").\"\"}]%m
+set statusline+=%4*%=\ %6*%y%4*\ %3*%l%4*,\ %3*%c%4*\ \<\ %2*%P%4*\ \>
+highlight User1 ctermfg=red
+highlight User2 term=underline cterm=underline ctermfg=green
+highlight User3 term=underline cterm=underline ctermfg=yellow
+highlight User4 term=underline cterm=underline ctermfg=white
+highlight User5 ctermfg=cyan
+highlight User6 ctermfg=white
+
+" Settings for deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Settings for neosnippet.vim
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-j>     <Plug>(neosnippet_expand_or_jump)
+smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-j>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
