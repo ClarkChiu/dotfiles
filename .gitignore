@@ -1,3 +1,6 @@
+# Ingnore local Vimrc
+.vim/custom.vimrc
+
 # Ingnore Vim backup folder
 .vim/backup/
 

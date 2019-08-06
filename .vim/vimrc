@@ -245,3 +245,10 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+" For import custom Vimrc config for local auto command
+let $CUSTOM_VIMRC=$HOME.'/.vim/custom.vimrc'
+
+if filereadable($CUSTOM_VIMRC)
+  source $CUSTOM_VIMRC
+endif
