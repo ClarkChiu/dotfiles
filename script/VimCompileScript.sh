@@ -19,7 +19,8 @@ sudo apt-get install -y \
 	lua5.3 \
    	git
 
-pip3 install --user pynvim
+pip3 install --user --upgrade pynvim
+pip3 install --user --upgrade flake8
 
 # link the libs of lua
 sudo rm -f /usr/include/lua /usr/local/lib/liblua.so

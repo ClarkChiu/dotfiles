@@ -158,6 +158,12 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 
+" Display checker-name for that error-message
+let g:syntastic_aggregate_errors = 1
+
+" I use the brew to install flake8
+let g:syntastic_python_checkers=['flake8', 'python3']
+
 " Settings for Vim theme
 set t_Co=256
 colorscheme moody
@@ -165,9 +171,9 @@ colorscheme moody
 " Settings for NERDTree
 map <F2> :NERDTreeToggle<CR>
 " Auto start NERDTree
-autocmd VimEnter * NERDTree
+" autocmd VimEnter * NERDTree
 " Auto focus to the main window.
-autocmd VimEnter * wincmd w
+" autocmd VimEnter * wincmd w
 " Enable line number
 let NERDTreeShowLineNumbers=1
 let NERDTreeAutoCenter=1
