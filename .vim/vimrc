@@ -130,9 +130,11 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+" neo-snippet plugin
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
+" The all-language autocompleter
 if has('win32') || has('win64')
   Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
 else
@@ -193,6 +195,10 @@ let g:NERDTreeIndicatorMapCustom = {
 
 " Settings for NERDCommenter
 let g:NERDSpaceDelims=1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
 
 " Settings for Tagbar
 nmap <F3> :TagbarToggle<CR>
