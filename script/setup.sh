@@ -13,10 +13,10 @@ sh ~/dotfiles/script/VimCompileScript.sh
 ## Setup the soft link for vim resource
 mkdir -p ~/dotfiles/.vim/backup
 
-unlink ~/.vim
-unlink ~/.vimrc
+rm ~/.vim
+rm ~/.vimrc
 ln -sf ~/dotfiles/.vim/vimrc ~/.vimrc
-ln -sf ~/dotfiles/.vim ~/.vim
+ln -sf ~/dotfiles/.vim/ ~/.vim
 
 ## Clean and Install the vim plugin
 mkdir -p ~/dotfiles/.vim/plugged
